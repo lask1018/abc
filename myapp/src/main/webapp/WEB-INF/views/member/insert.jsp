@@ -3,8 +3,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+#loadingImage{
+position : absolute;
+left : 50%;
+top : 50%;
+background : #ffffff;
+}
+</style>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>회원 가입</title>
 </head>
 <body>
@@ -12,7 +20,7 @@
 <form action="/myapp/member/insert" method=post enctype="multipart/form-data">
 <table>
 <tr>
-<td>아이디<input type=text name=userId></td>
+<td>아이디<input type=text name=userId id=userId><button id=check>중복 검사</button></td>
 </tr>
 <tr>
 <td>비밀번호<input type=text name=password></td>
@@ -27,49 +35,57 @@
 <td>프로필 사진<input type=file name=file></td>
 </tr>
 <tr>
-<td><input type=submit value="저장"><input type=reset value="취소"></td>
+<td><input type=submit value="저장" id=submit><input type=reset value="취소"></td>
 </tr>
 </table>
+<div id="loadingImage"><img src="/myapp/resources/images/loading.gif" />/</div>
 </form>
 <script>
 $(function(){
+	$("#loadingImage").hide();
 	var ck = false;
 	$("#check").on("click",function(){
 		if($("#userId").val()){
-			$.ajax({
-				url : "check",
-				type : "post",
-				data : {empId : $("#userId").val()},
-				dataType : "text",
-				success : function(check){
-					console.log(check);
-					if(check){
-						alert("중복되지 않습니다.");
-						$("#check").remove();
-						$("#userId").attr("readonly",true);
-						ck = !ck;
-					}else{
-						alert("아이디가 중복됩니다.");
-					}
-					return false;
+		$.ajax({
+			url : "/myapp/member/check",
+			type : "post",
+			data : {userId : $("#userId").val()},
+			dataType : "text",
+			success : function(result){
+				if(result){
+					alert("사용 가능한 아이디입니다.");
+					$("#check").remove();
+					$("#userId").attr("readonly",true);
+					ck = !ck;
+				}else{
+					alert("아이디가 중복됩니다.");	
+				}
+				return false;
 				},
 				error : function(){
-					alert("ajax에 문제가 있습니다.");
+					alert("ajax 실패");
 					return false;
 				}
 			});
 		}else{
-			alert("값이 있어야 합니다.");
-			return false;
-		}
+		alert("id가 입력되어야 중복검사가 가능합니다.");
+		return false;
+			}
+	});
+	$(document).ajaxStart(function(){
+		$("#loadingImage").show();
+		setTimeout(function(){},2000);
+	});
+	$(document).ajaxStop(function(){
+		$("#loadingImage").hide();
 	});
 	$("#submit").on("click",function(){
-	if(ck){
-	
-	}else{
-		alert("중복검사가 먼저 진행되어야 합니다.");
-		return false;
-		}	
+		if(!ck){
+			alert("중복검사를 진행하셔야 합니다.");
+			return false;
+		}else{
+			
+		}
 	});
 });
 </script>

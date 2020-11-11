@@ -35,9 +35,12 @@ public class MemberService implements IMemberService {
 	}
 
 	@Override
-	public String idCheck(String userid) {
+	public int idCheck(String userid) {
 		return memberRepository.idCheck(userid);
+		
 	}
+
+
 
 
 

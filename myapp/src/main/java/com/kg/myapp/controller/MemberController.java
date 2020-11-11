@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kg.myapp.dao.IMemberService;
 import com.kg.myapp.vo.MemberVO;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @Controller
 @RequestMapping(value="/member")
 public class MemberController {
@@ -47,11 +49,9 @@ public class MemberController {
 		return "redirect:/login";
 	}
 	
-	@PostMapping(value="/insert")
-	@ResponseBody
+	@PostMapping(value="/check")
 	public String idCheck(String userid) {
-		return memberservice.idCheck(userid)== ? "true" : null;
-		
+		return memberservice.idCheck(userid)==0 ? "true" : null;
 	}
 	
 }

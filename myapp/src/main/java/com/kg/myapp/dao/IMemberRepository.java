@@ -7,6 +7,6 @@ public interface IMemberRepository {
 	void insertMember(MemberVO user);
 	String getPassword(String userid);
 	MemberVO getMember(String userid);
-	String idCheck(String userid);
+	int idCheck(String userid);
 
 }
