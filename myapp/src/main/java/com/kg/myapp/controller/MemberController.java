@@ -50,6 +50,7 @@ public class MemberController {
 	}
 	
 	@PostMapping(value="/check")
+	@ResponseBody
 	public String idCheck(String userid) {
 		return memberservice.idCheck(userid)==0 ? "true" : null;
 	}

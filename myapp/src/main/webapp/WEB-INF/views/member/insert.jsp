@@ -20,7 +20,7 @@ background : #ffffff;
 <form action="/myapp/member/insert" method=post enctype="multipart/form-data">
 <table>
 <tr>
-<td>아이디<input type=text name=userId id=userId><button id=check>중복 검사</button></td>
+<td>아이디<input type=text name=userId id=userId><button type=button id=check>중복검사</button></td>
 </tr>
 <tr>
 <td>비밀번호<input type=text name=password></td>
@@ -49,7 +49,7 @@ $(function(){
 		$.ajax({
 			url : "/myapp/member/check",
 			type : "post",
-			data : {userId : $("#userId").val()},
+			data : {userid : $("#userId").val()},
 			dataType : "text",
 			success : function(result){
 				if(result){

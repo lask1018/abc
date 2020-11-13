@@ -20,6 +20,6 @@
 		from emp_users where userId=#{userId}
 	</select>
 	<select id="idCheck" parameterType="String" resultType="int">
-	select count(*) from employees where userId=#{userId}
+	select count(*) from emp_users where userId=#{userId}
 	</select>
 </mapper>

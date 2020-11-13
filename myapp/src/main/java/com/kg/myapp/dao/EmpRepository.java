@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,6 +19,7 @@ import com.kg.myapp.vo.EmpVO;
 public class EmpRepository implements IEmpRepository {
 	
 	@Autowired
+	@Qualifier("myJdbcTemplate")
 	JdbcTemplate jdbcTemplate;
 	private ResultSetExtractor empMapper;
 	

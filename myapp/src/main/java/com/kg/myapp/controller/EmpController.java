@@ -182,6 +182,19 @@ import com.kg.myapp.vo.EmpVO;
 			
 		}
 		
+		@RequestMapping(value="/emp/json/list")
+		public @ResponseBody List<EmpVO> getAllEmployees() {
+			List<EmpVO> empList = empService.getEmpList();
+			return empList;
+		}
+		
+		@RequestMapping(value="/emp/json/{employeeId}")
+		public @ResponseBody EmpVO getEmployees(@PathVariable int
+				employeeId) {
+			EmpVO emp = empService.getEmpInfo(employeeId);
+			return emp;
+		}
+		
 		
 	}
 	

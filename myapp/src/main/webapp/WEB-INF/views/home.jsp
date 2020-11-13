@@ -22,7 +22,10 @@
 <input type=submit value=검색>
 </form>
 <form action="emp/nameSearch">
-2. 이름 검색 : <input type=text name=name>&nbsp;<input type=submit value="검색">
+2. 이름 검색 : <input type=text name=name>&nbsp;<input type=submit value="검색"><br>
 </form>
+<form action="logout.do" method="post">
+<input type=submit value=로그아웃>
+</form><br>
 </body>
 </html>
